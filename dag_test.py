@@ -1,5 +1,5 @@
 from airflow.models import DAG
-from datetime import datetime
+from datetime import datetime, date
 from datetime import timedelta
 from airflow.operators.bash_operator import BashOperator
 
@@ -11,10 +11,10 @@ default_args = {
     "email_on_retry": False,
     "retries": 1,
     "start_date": datetime(
-        2020, 1, 1
+        date.today().year, date.today().month, date.today().day
     ),  # If you set a datetime previous to the curernt date, it will try to backfill
     "retry_delay": timedelta(minutes=5),
-    "end_date": datetime(2022, 1, 1),
+    "end_date": datetime(2025, 1, 1),
 }
 with DAG(
     dag_id="test_dag_dependencies",
